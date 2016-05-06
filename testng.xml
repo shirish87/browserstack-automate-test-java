@@ -5,11 +5,4 @@
             <class name="com.browserstack.automate.test.TestNGTest"/>
         </classes>
     </test>
-    <test name="AutomateAPITest|JUnit" junit="true">
-        <classes>
-            <class name="com.browserstack.automate.test.AutomateClassDefTest"/>
-            <class name="com.browserstack.automate.test.AutomateTest"/>
-            <class name="com.browserstack.automate.test.ParallelTest"/>
-        </classes>
-    </test>
 </suite>

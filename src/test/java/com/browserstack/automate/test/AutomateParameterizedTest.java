@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.LinkedList;
 
 @RunWith(Parallelized.class)
-public class AutomateTest {
+public class AutomateParameterizedTest {
 
     private static String username = System.getenv("BROWSERSTACK_USER");
     private static String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
@@ -25,11 +25,11 @@ public class AutomateTest {
     private RemoteWebDriver webDriver;
     private Browser browser;
 
-    public AutomateTest(Browser browser) {
+    public AutomateParameterizedTest(Browser browser) {
         this.browser = browser;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "BrowserStack:{index}")
     public static LinkedList<Browser[]> getEnvironments() throws Exception {
         LinkedList<Browser[]> env = new LinkedList<Browser[]>();
 
@@ -51,8 +51,8 @@ public class AutomateTest {
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("name", TestHelper.getSessionName(browser));
-        caps.setCapability("project", "Automate Java");
-
+        caps.setCapability("project", TestHelper.getProjectName());
+        caps.setCapability("build", TestHelper.getBuildName());
         AutomateTestHelper.applyBrowser(browser, caps);
         webDriver = new RemoteWebDriver(new URL(hubUrl), caps);
     }

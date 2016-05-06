@@ -9,6 +9,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Parallelized extends Parameterized {
 
+    public Parallelized(Class<?> klass) throws Throwable {
+        super(klass);
+        setScheduler(new ThreadPoolScheduler());
+    }
+
     private static class ThreadPoolScheduler implements RunnerScheduler {
         private ExecutorService executor;
 
@@ -30,10 +35,5 @@ public class Parallelized extends Parameterized {
         public void schedule(Runnable childStatement) {
             executor.submit(childStatement);
         }
-    }
-
-    public Parallelized(Class<?> klass) throws Throwable {
-        super(klass);
-        setScheduler(new ThreadPoolScheduler());
     }
 }
