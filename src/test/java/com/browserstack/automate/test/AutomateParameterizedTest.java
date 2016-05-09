@@ -10,6 +10,7 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,10 +35,10 @@ public class AutomateParameterizedTest {
         LinkedList<Browser[]> env = new LinkedList<Browser[]>();
 
         try {
-            for (Browser browser : AutomateTestHelper.parseBrowsers()) {
+            for (Browser browser : AutomateTestHelper.parseBrowsers(TestHelper.getBrowsersJson())) {
                 env.add(new Browser[]{browser});
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Browser browser = new Browser();
             browser.setBrowser("chrome");
             browser.setBrowserVersion("49.0");

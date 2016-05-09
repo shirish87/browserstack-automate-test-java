@@ -34,10 +34,10 @@ public class AutomateTest {
         LinkedList<Browser[]> env = new LinkedList<Browser[]>();
 
         try {
-            for (Browser browser : AutomateTestHelper.parseBrowsers()) {
+            for (Browser browser : AutomateTestHelper.parseBrowsers(TestHelper.getBrowsersJson())) {
                 env.add(new Browser[]{browser});
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Browser browser = new Browser();
             browser.setBrowser("chrome");
             browser.setBrowserVersion("49.0");

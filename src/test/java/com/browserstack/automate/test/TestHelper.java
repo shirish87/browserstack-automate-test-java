@@ -1,11 +1,18 @@
 package com.browserstack.automate.test;
 
 import com.browserstack.client.model.Browser;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Scanner;
 
 public class TestHelper {
 
-    public static org.openqa.selenium.remote.DesiredCapabilities getCapabilities(String browserName) {
-        org.openqa.selenium.remote.DesiredCapabilities caps = new org.openqa.selenium.remote.DesiredCapabilities();
+    public static DesiredCapabilities getCapabilities(String browserName) {
+        DesiredCapabilities caps = new DesiredCapabilities();
         caps.setBrowserName(browserName);
         caps.setCapability("project", getProjectName());
         caps.setCapability("build", getBuildName());
@@ -29,5 +36,10 @@ public class TestHelper {
     public static String getBuildName() {
         String envBuildId = System.getenv("BUILD_NUMBER");
         return "JUnit|TestNG" + ((envBuildId != null) ? ": " + envBuildId : "");
+    }
+
+    public static String getBrowsersJson() throws IOException, URISyntaxException {
+        URL browsersUrl = AutomateParameterizedTest.class.getResource("/browsers.json");
+        return new Scanner(new File(browsersUrl.toURI()), "UTF8").useDelimiter("\\Z").next();
     }
 }
