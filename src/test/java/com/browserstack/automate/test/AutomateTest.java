@@ -18,10 +18,6 @@ import java.util.LinkedList;
 @RunWith(Parallelized.class)
 public class AutomateTest {
 
-    private static String username = System.getenv("BROWSERSTACK_USER");
-    private static String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
-    private static String hubUrl = String.format("https://%s:%s@hub.browserstack.com/wd/hub", username, accessKey);
-
     private RemoteWebDriver webDriver;
     private Browser browser;
 
@@ -54,7 +50,7 @@ public class AutomateTest {
         caps.setCapability("project", "Automate Java");
 
         AutomateTestHelper.applyBrowser(browser, caps);
-        webDriver = new RemoteWebDriver(new URL(hubUrl), caps);
+        webDriver = new RemoteWebDriver(new URL(TestHelper.getHubUrl()), caps);
     }
 
     @After

@@ -10,6 +10,13 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class TestHelper {
+    private static final String username = System.getenv("BROWSERSTACK_USER");
+    private static final String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
+
+    private static String HUB_URL = "https://%s:%s@hub.browserstack.com/wd/hub";
+    static {
+         System.setProperty("browserstack.testassist.hub", "browserstack.com");
+    }
 
     public static DesiredCapabilities getCapabilities(String browserName) {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -41,5 +48,9 @@ public class TestHelper {
     public static String getBrowsersJson() throws IOException, URISyntaxException {
         URL browsersUrl = AutomateParameterizedTest.class.getResource("/browsers.json");
         return new Scanner(new File(browsersUrl.toURI()), "UTF8").useDelimiter("\\Z").next();
+    }
+
+    public static String getHubUrl() {
+        return String.format(HUB_URL, username, accessKey);
     }
 }

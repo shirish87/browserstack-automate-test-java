@@ -10,7 +10,6 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,10 +17,6 @@ import java.util.LinkedList;
 
 @RunWith(Parallelized.class)
 public class AutomateParameterizedTest {
-
-    private static String username = System.getenv("BROWSERSTACK_USER");
-    private static String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
-    private static String hubUrl = String.format("https://%s:%s@hub.browserstack.com/wd/hub", username, accessKey);
 
     private RemoteWebDriver webDriver;
     private Browser browser;
@@ -55,7 +50,7 @@ public class AutomateParameterizedTest {
         caps.setCapability("project", TestHelper.getProjectName());
         caps.setCapability("build", TestHelper.getBuildName());
         AutomateTestHelper.applyBrowser(browser, caps);
-        webDriver = new RemoteWebDriver(new URL(hubUrl), caps);
+        webDriver = new RemoteWebDriver(new URL(TestHelper.getHubUrl()), caps);
     }
 
     @After

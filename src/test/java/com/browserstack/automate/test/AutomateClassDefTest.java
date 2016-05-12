@@ -10,15 +10,11 @@ import java.net.URL;
 
 public class AutomateClassDefTest {
 
-    private static String username = System.getenv("BROWSERSTACK_USER");
-    private static String accessKey = System.getenv("BROWSERSTACK_ACCESSKEY");
-    private static String hubUrl = String.format("https://%s:%s@hub.browserstack.com/wd/hub", username, accessKey);
-
     private static RemoteWebDriver webDriver;
 
     @BeforeClass
     public static void setUp() throws MalformedURLException {
-        webDriver = new RemoteWebDriver(new URL(hubUrl), TestHelper.getCapabilities("chrome"));
+        webDriver = new RemoteWebDriver(new URL(TestHelper.getHubUrl()), TestHelper.getCapabilities("chrome"));
     }
 
     @AfterClass
