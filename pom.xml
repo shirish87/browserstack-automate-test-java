@@ -9,6 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <source>1.5</source>
         <target>1.5</target>
         <aspect.java>1.5</aspect.java>
@@ -52,6 +53,7 @@
                     <complianceLevel>${aspect.java}</complianceLevel>
                     <source>${source}</source>
                     <target>${target}</target>
+                    <Xlint>adviceDidNotMatch=ignore</Xlint>
                 </configuration>
                 <executions>
                     <execution>
