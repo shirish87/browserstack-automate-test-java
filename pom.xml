@@ -9,9 +9,6 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <source>1.5</source>
-        <target>1.5</target>
-        <aspect.java>1.5</aspect.java>
         <surefire.version>2.19.1</surefire.version>
     </properties>
 
@@ -24,35 +21,9 @@
 
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.8</version>
-                <configuration>
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>com.browserstack.automate</groupId>
-                            <artifactId>testassist</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-                    <weaveDependencies>
-                        <weaveDependency>
-                            <groupId>org.seleniumhq.selenium</groupId>
-                            <artifactId>selenium-remote-driver</artifactId>
-                        </weaveDependency>
-                    </weaveDependencies>
-                    <complianceLevel>${aspect.java}</complianceLevel>
-                    <source>${source}</source>
-                    <target>${target}</target>
-                </configuration>
+                <groupId>com.browserstack.automate</groupId>
+                <artifactId>testassist</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <goals>
@@ -144,8 +115,8 @@
             </snapshots>
         </repository>
         <repository>
-            <id>browserstack-testassist-java-mvn-testassist</id>
-            <url>https://raw.github.com/shirish87/browserstack-automate-java/mvn-testassist/</url>
+            <id>browserstack-testassist-java-mvn-testassist-mvn</id>
+            <url>https://raw.github.com/shirish87/browserstack-automate-java/mvn-testassist-mvn/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
