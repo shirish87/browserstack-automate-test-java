@@ -37,9 +37,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.browserstack.automate</groupId>
-                <artifactId>maven-testassist</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <groupId>com.browserstack</groupId>
+                <artifactId>automate-maven-plugin</artifactId>
+                <version>0.1-SNAPSHOT</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -84,15 +84,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.browserstack.automate</groupId>
-            <artifactId>maven-testassist</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.browserstack</groupId>
+            <artifactId>automate-maven-plugin</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.browserstack</groupId>
-            <artifactId>automate</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>automate-client-java</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -182,20 +182,15 @@
 
     <repositories>
         <repository>
-            <id>browserstack-automate-java-mvn-automate</id>
-            <url>https://raw.github.com/shirish87/browserstack-automate-java/mvn-automate/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>shirish87-github</id>
-            <name>Plugin Repository</name>
-            <url>https://raw.github.com/shirish87/browserstack-automate-java/mvn-maven-testassist</url>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
