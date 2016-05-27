@@ -10,10 +10,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <source>1.6</source>
-        <target>1.6</target>
-        <aspect.java>1.6</aspect.java>
         <surefire.version>2.19.1</surefire.version>
+
+        <jdk.version>1.8</jdk.version>
+        <maven.version>3.5.1</maven.version>
+        <selenium.version>2.53.0</selenium.version>
+        <junit.version>4.12</junit.version>
+        <testng.version>6.9.10</testng.version>
     </properties>
 
     <build>
@@ -27,44 +30,28 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>${maven.version}</version>
                 <configuration>
-                    <source>${source}</source>
-                    <target>${target}</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.7</version>
+                <groupId>com.browserstack</groupId>
+                <artifactId>automate-maven-plugin</artifactId>
+                <version>0.1-SNAPSHOT</version>
                 <configuration>
-                    <aspectLibraries>
-                        <aspectLibrary>
-                            <groupId>com.browserstack.automate</groupId>
-                            <artifactId>testassist</artifactId>
-                        </aspectLibrary>
-                    </aspectLibraries>
-                    <weaveDependencies>
-                        <weaveDependency>
-                            <groupId>org.seleniumhq.selenium</groupId>
-                            <artifactId>selenium-remote-driver</artifactId>
-                        </weaveDependency>
-                    </weaveDependencies>
-                    <complianceLevel>${aspect.java}</complianceLevel>
-                    <source>${source}</source>
-                    <target>${target}</target>
-                    <Xlint>adviceDidNotMatch=ignore</Xlint>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>compile</goal>
                             <goal>test-compile</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -76,7 +63,6 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
-
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
                 </configuration>
@@ -99,14 +85,14 @@
     <dependencies>
         <dependency>
             <groupId>com.browserstack</groupId>
-            <artifactId>automate</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <artifactId>automate-maven-plugin</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.browserstack.automate</groupId>
-            <artifactId>testassist</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.browserstack</groupId>
+            <artifactId>automate-client-java</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -118,40 +104,93 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.37.0</version>
+            <version>${selenium.version}</version>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8.21</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>env-jdk-version</id>
+            <activation>
+                <property>
+                    <name>env.JDK_VERSION</name>
+                </property>
+            </activation>
+            <properties>
+                <jdk.version>${env.JDK_VERSION}</jdk.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>env-maven-version</id>
+            <activation>
+                <property>
+                    <name>env.MAVEN_VERSION</name>
+                </property>
+            </activation>
+            <properties>
+                <maven.version>${env.MAVEN_VERSION}</maven.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>env-selenium-version</id>
+            <activation>
+                <property>
+                    <name>env.SELENIUM_VERSION</name>
+                </property>
+            </activation>
+            <properties>
+                <selenium.version>${env.SELENIUM_VERSION}</selenium.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>env-junit-version</id>
+            <activation>
+                <property>
+                    <name>env.JUNIT_VERSION</name>
+                </property>
+            </activation>
+            <properties>
+                <junit.version>${env.JUNIT_VERSION}</junit.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>env-testng-version</id>
+            <activation>
+                <property>
+                    <name>env.TESTNG_VERSION</name>
+                </property>
+            </activation>
+            <properties>
+                <testng.version>${env.TESTNG_VERSION}</testng.version>
+            </properties>
+        </profile>
+    </profiles>
+
     <repositories>
         <repository>
-            <id>browserstack-automate-java-mvn-automate</id>
-            <url>https://raw.github.com/shirish87/browserstack-automate-java/mvn-automate/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>browserstack-testassist-java-mvn-testassist</id>
-            <url>https://raw.github.com/shirish87/browserstack-automate-java/mvn-testassist/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

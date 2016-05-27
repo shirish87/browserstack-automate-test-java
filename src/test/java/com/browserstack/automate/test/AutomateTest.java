@@ -1,6 +1,5 @@
 package com.browserstack.automate.test;
 
-import com.browserstack.automate.helper.AutomateTestHelper;
 import com.browserstack.client.model.Browser;
 import org.junit.After;
 import org.junit.Before;
@@ -28,18 +27,12 @@ public class AutomateTest {
     @Parameterized.Parameters
     public static LinkedList<Browser[]> getEnvironments() throws Exception {
         LinkedList<Browser[]> env = new LinkedList<Browser[]>();
-
-        try {
-            for (Browser browser : AutomateTestHelper.parseBrowsers(TestHelper.getBrowsersJson())) {
-                env.add(new Browser[]{browser});
-            }
-        } catch (Exception e) {
-            Browser browser = new Browser();
-            browser.setBrowser("chrome");
-            browser.setBrowserVersion("49.0");
-            env.add(new Browser[]{browser});
-        }
-
+        Browser browser = new Browser();
+        browser.setBrowser("chrome");
+        browser.setBrowserVersion("49.0");
+        browser.setOs("Windows");
+        browser.setOsVersion("7");
+        env.add(new Browser[]{browser});
         return env;
     }
 
@@ -48,8 +41,11 @@ public class AutomateTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("name", TestHelper.getSessionName(browser));
         caps.setCapability("project", "Automate Java");
+        caps.setCapability("browser", browser.getBrowser());
+        caps.setCapability("browser_version", browser.getBrowserVersion());
+        caps.setCapability("os", browser.getOs());
+        caps.setCapability("os_version", browser.getOsVersion());
 
-        AutomateTestHelper.applyBrowser(browser, caps);
         webDriver = new RemoteWebDriver(new URL(TestHelper.getHubUrl()), caps);
     }
 
