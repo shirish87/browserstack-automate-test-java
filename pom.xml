@@ -36,14 +36,11 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
+            <!-- BrowserStack Automate -->
             <plugin>
                 <groupId>com.browserstack</groupId>
                 <artifactId>automate-maven-plugin</artifactId>
-                <version>0.2-SNAPSHOT</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
+                <version>0.7.2-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <goals>
@@ -52,6 +49,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- /BrowserStack Automate -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -83,22 +81,18 @@
     </build>
 
     <dependencies>
+        <!-- BrowserStack Automate -->
         <dependency>
             <groupId>com.browserstack</groupId>
-            <artifactId>automate-maven-plugin</artifactId>
-            <version>0.2-SNAPSHOT</version>
+            <artifactId>automate-testassist</artifactId>
+            <version>0.7.2-SNAPSHOT</version>
         </dependency>
+        <!-- /BrowserStack Automate -->
 
         <dependency>
             <groupId>com.browserstack</groupId>
             <artifactId>automate-client-java</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.7.4</version>
+            <version>0.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
