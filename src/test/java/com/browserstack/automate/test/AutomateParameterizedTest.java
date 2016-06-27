@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(Parallelized.class)
+@RunWith(Parameterized.class)
 public class AutomateParameterizedTest {
 
     private RemoteWebDriver webDriver;
@@ -26,12 +26,19 @@ public class AutomateParameterizedTest {
         this.browser = browser;
     }
 
-    @Parameterized.Parameters(name = "BrowserStack:{index}")
+    @Parameterized.Parameters
     public static LinkedList<Browser[]> getEnvironments() throws Exception {
         LinkedList<Browser[]> env = new LinkedList<Browser[]>();
         Browser browser = new Browser();
         browser.setBrowser("chrome");
         browser.setBrowserVersion("49.0");
+        browser.setOs("Windows");
+        browser.setOsVersion("7");
+        env.add(new Browser[]{browser});
+
+        browser = new Browser();
+        browser.setBrowser("chrome");
+        browser.setBrowserVersion("50.0");
         browser.setOs("Windows");
         browser.setOsVersion("7");
         env.add(new Browser[]{browser});
