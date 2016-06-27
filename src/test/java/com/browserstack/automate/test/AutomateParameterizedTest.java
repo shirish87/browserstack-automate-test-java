@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(Parallelized.class)
 public class AutomateParameterizedTest {
 
@@ -65,6 +67,12 @@ public class AutomateParameterizedTest {
     @Test
     public void test2() throws IOException {
         webDriver.get("https://www.google.com/search?hl=en&source=hp&q=test2");
+        assertEquals("Fail test2", webDriver.getTitle());
+    }
+
+    @Test
+    public void test3() throws IOException {
+        webDriver.get("https://www.google.com/search?hl=en&source=hp&q=test3");
     }
 
 }
